@@ -6,6 +6,7 @@ import NextTurn from './components/NextTurn';
 import RoundNumber from './components/RoundNumber';
 import useLocalStorageState from './userLocalStorageState';
 import NewEncounter from './components/NewEncounter';
+import NewEnemy from './components/NewEnemy';
 
 function App() {
   const [encounter, setEncounter] = useLocalStorageState('encounter', {characters: [], rounds: 1, currentTurn: -1 });
@@ -77,6 +78,7 @@ function App() {
       <header className="App-header">
         <NewEncounter newEncounter={handleNewEncounter} />
         <NewCharacter addCharacter={updateCharacter} />
+        <NewEnemy addCharacter={updateCharacter} />
         <NextTurn nextTurn={handleNextTurn} />
         <RoundNumber rounds={encounter.rounds} />
         <CharactersTable updateCharacter={updateCharacter} characters={encounter.characters} currentTurn={encounter.currentTurn} />

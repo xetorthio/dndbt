@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const NewCharacter = ({addCharacter}) => {
     const addNewCharacter = () => {
-        addCharacter({id: uuidv4(), name: '', initiative: 0, hp: 0, conditions: {}});
+        addCharacter({id: uuidv4(), name: '', initiative: 0, hp: 0, enemy: false, conditions: {}});
     }
     return (
         <Button variant="contained" onClick={addNewCharacter}>Add Character</Button>

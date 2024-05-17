@@ -11,8 +11,8 @@ import ConditionSelector from './ConditionSelector';
 import { styled } from '@mui/material/styles';
 
 
-const CustomTableRow = styled(TableRow)(({ theme }) => ({
-    backgroundColor: '#FFEB3B',
+const TurnTableRow = styled(TableRow)(({ theme, isPlaying, isEnemy }) => ({
+    backgroundColor: isPlaying ? '#FDFFB6' : isEnemy ? '#FFADAD' : theme.palette.background.default,
 }));
 
 const CharactersTable = ({ updateCharacter,  characters, currentTurn }) => {
@@ -39,25 +39,15 @@ const CharactersTable = ({ updateCharacter,  characters, currentTurn }) => {
                 </TableHead>
                 <TableBody>
                 {characters.map((character, index) => (
-                    index !== currentTurn ? 
-                    <TableRow
-                    key={character.id}
+                    <TurnTableRow key={character.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
+                    isPlaying={index === currentTurn}
+                    isEnemy={character.enemy}>
                         <EditableCell value={character.name} updateValue={(value) => {character.name = value; updateCharacter(character)} } />
                         <EditableCell value={character.initiative} updateValue={(value) => {character.initiative = value; updateCharacter(character)} } />
                         <EditableCell value={character.hp} updateValue={(value) => {evaluateHP(character, value)}} />
                         <TableCell component="th" scope="row"><ConditionSelector character={character} updateCharacter={updateCharacter} /></TableCell>
-                    </TableRow>
-                    : 
-                    <CustomTableRow
-                    key={character.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <EditableCell value={character.name} updateValue={(value) => {character.name = value; updateCharacter(character)} } />
-                        <EditableCell value={character.initiative} updateValue={(value) => {character.initiative = value; updateCharacter(character)} } />
-                        <EditableCell value={character.hp} updateValue={(value) => {evaluateHP(character, value)}} />
-                        <TableCell component="th" scope="row"><ConditionSelector character={character} updateCharacter={updateCharacter} /></TableCell>
-                    </CustomTableRow>
+                    </TurnTableRow>
                 ))}
                 </TableBody>                
             </Table>
