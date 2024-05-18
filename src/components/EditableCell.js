@@ -25,7 +25,7 @@ const EditableCell = ({value, updateValue}) => {
     }
 
     return (
-        <TableCell component="th" scope="row" onClick={handleCellClick}>
+        <TableCell scope="row" onClick={handleCellClick}>
             {editKey ?  (
                 <TextField id="standard-basic" label="Standard" variant="standard" defaultValue={value} onChange={onChangeValue} onBlur={handleInputBlur} autoFocus={true} onKeyDown={handleInputKeyDown} />
             ) : (

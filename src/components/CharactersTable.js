@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import EditableCell from './EditableCell';
 import ConditionSelector from './ConditionSelector';
 import { styled } from '@mui/material/styles';
+import DuplicateCharacter from './DuplicateCharacter';
 
 
 const TurnTableRow = styled(TableRow)(({ theme, isPlaying, isEnemy }) => ({
@@ -31,6 +32,7 @@ const CharactersTable = ({ updateCharacter,  characters, currentTurn }) => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
+                        <TableCell>Action</TableCell>
                         <TableCell>Character</TableCell>
                         <TableCell>Initiative</TableCell>
                         <TableCell>HP</TableCell>
@@ -43,10 +45,11 @@ const CharactersTable = ({ updateCharacter,  characters, currentTurn }) => {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     isPlaying={index === currentTurn}
                     isEnemy={character.enemy}>
+                        <TableCell sx={{'width': '100px'}} scope="row"><DuplicateCharacter character={character} updateCharacter={updateCharacter} /></TableCell>
                         <EditableCell value={character.name} updateValue={(value) => {character.name = value; updateCharacter(character)} } />
                         <EditableCell value={character.initiative} updateValue={(value) => {character.initiative = value; updateCharacter(character)} } />
                         <EditableCell value={character.hp} updateValue={(value) => {evaluateHP(character, value)}} />
-                        <TableCell component="th" scope="row"><ConditionSelector character={character} updateCharacter={updateCharacter} /></TableCell>
+                        <TableCell scope="row"><ConditionSelector character={character} updateCharacter={updateCharacter} /></TableCell>
                     </TurnTableRow>
                 ))}
                 </TableBody>                
